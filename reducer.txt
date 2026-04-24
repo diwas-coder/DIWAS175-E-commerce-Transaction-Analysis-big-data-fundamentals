@@ -1,0 +1,22 @@
+#!/usr/bin/env python
+import sys
+
+current_product = None
+current_total = 0
+
+for line in sys.stdin:
+    line = line.strip()
+    product, quantity = line.split('\t')
+    quantity = int(quantity)
+
+    if product == current_product:
+        current_total += quantity
+    else:
+        if current_product:
+            print(current_product + " " + str(current_total))
+        current_product = product
+        current_total = quantity
+
+# Last product
+if current_product:
+    print(current_product + " " + str(current_total))
